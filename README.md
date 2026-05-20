@@ -1,55 +1,57 @@
-# NeuroScan
- NeuroScan classification Web App
-This project is a web-based application for brain tumor classification using deep learning models. The app allows users to upload medical images (such as MRI scans) of the brain, and it classifies them into four categories:
+# Brain Tumor Classification using Vision Transformer (ViT)
 
-Glioma
+This project implements a state-of-the-art Brain Tumor Classification pipeline using a Vision Transformer (ViT) architecture. It classifies MRI scans into four categories: Glioma, Meningioma, Pituitary, and No Tumor.
 
-Meningioma
+## 🚀 Key Features
+- **ViT Architecture:** Uses `vit_tiny_patch16_224` for efficient and accurate classification.
+- **Enhanced Training:** Includes Early Stopping, LR Scheduling, and Reproducibility.
+- **Comprehensive Evaluation:** Accuracy, Precision, Recall, F1-Score, ROC-AUC, and Confusion Matrix.
+- **Interpretability:** Grad-CAM and Feature Map visualizations for transparency.
+- **Interactive Dashboard:** Streamlit app for easy inference and visualization.
 
-Pituitary
+## 📂 Project Structure
+- `train.py`: Main training script with optimizations and history tracking.
+- `evaluate.py`: Evaluation script for generating detailed metrics and plots.
+- `interpret.py`: Script for feature learning analysis and Grad-CAM generation.
+- `app.py`: Streamlit dashboard for user interaction.
+- `archive/`: Dataset directory containing Training and Testing folders.
+- `requirements.txt`: Project dependencies.
 
-No Tumor
+## 🛠️ Installation & Usage
 
-The application utilizes a convolutional neural network (CNN) trained on medical image datasets, which has been implemented using TensorFlow and Keras.
-![prediction_1245b3a4](https://github.com/user-attachments/assets/aff448dc-e6d3-4ce5-90ec-f57ab21aa958)
-![prediction_b661fc31](https://github.com/user-attachments/assets/fe9ed940-9451-430d-902c-40ae3bc73bd4)
+1. **Install Dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Features:
-File Upload: Users can upload an image of the brain for classification.
+2. **Train the Model:**
+   ```bash
+   python train.py
+   ```
+   *This will save the best model as `best_vit_model.pth` and generate `training_plots.png`.*
 
-Prediction Output: The model predicts the class of the uploaded image with associated probability scores.
+3. **Evaluate the Model:**
+   ```bash
+   python evaluate.py
+   ```
+   *This will generate `test_metrics.txt`, `confusion_matrix.png`, `roc_curve.png`, etc.*
 
-Annotated Image: The app provides an annotated image with the prediction result and probabilities displayed directly on the image.
+4. **Run Interpretability Analysis:**
+   ```bash
+   python interpret.py
+   ```
+   *Visualizes what the model learns at different depths.*
 
-Image Download: Users can download the annotated image for further analysis.
+5. **Launch the Dashboard:**
+   ```bash
+   streamlit run app.py
+   ```
 
-User Interface: The app provides an easy-to-use interface with a clean design and interactive elements for better usability.
+## 📊 Feature Learning Analysis
+The ViT model learns features in stages:
+- **Early Layers:** Focus on edges, lines, and simple MRI textures.
+- **Middle Layers:** Identify tumor regions, shapes, and spatial structures.
+- **Deep Layers:** Capture high-level pathological features using attention mechanisms.
 
-Tech Stack:
-FastAPI: For building the backend API to handle image uploads and predictions.
-
-TensorFlow & Keras: For building and deploying the deep learning model.
-
-HTML/CSS/JavaScript: For the front-end to enable interaction with the user.
-
-Pillow: For image processing and adding annotations to the predicted images.
-
-How to Use:
-Upload an MRI scan or a brain image in PNG/JPEG format.
-
-The model will classify the image and display the prediction along with probabilities.
-
-The image will be annotated with the predicted result, and you can download it for further review.
-
-Installation:
-Clone this repository:
-git clone https://github.com/ComputerVision804/brain-tumor-classification
-cd brain-tumor-classification
-Install the required dependencies:
-pip install -r requirements.txt
-Run the app:
-uvicorn main:app --reload
-Visit http://127.0.0.1:8000 in your browser to interact with the application.
-
-Contributing:
-Feel free to fork this repository, create an issue for any bugs, or submit a pull request for any improvements or additional features.![101](https://github.com/user-attachments/assets/95141d17-c909-4d0d-b1cc-28877c1784ba)
+## 📈 Results
+Evaluation results and visualizations are saved in the project root after running `evaluate.py`.
